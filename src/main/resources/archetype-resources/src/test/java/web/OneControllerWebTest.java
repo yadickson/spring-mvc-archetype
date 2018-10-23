@@ -1,7 +1,7 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-package ${package}.rest;
+package ${package}.web;
 
 import org.junit.Before;
 import org.junit.Test;
