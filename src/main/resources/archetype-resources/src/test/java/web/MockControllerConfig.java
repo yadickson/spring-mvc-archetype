@@ -13,7 +13,7 @@ import ${package}.service.OneService;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"${package}.controller"})
+@ComponentScan(basePackages = {"${package}.controller, ${package}.config"})
 public class MockControllerConfig {
 
     @Bean

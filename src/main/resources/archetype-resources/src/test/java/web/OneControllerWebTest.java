@@ -21,10 +21,12 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import ${package}.constant.Constants;
 import ${package}.controller.OneController;
 import ${package}.service.OneService;
 
@@ -59,7 +61,27 @@ public class OneControllerWebTest {
     public void testToDo() throws Exception {
         when(oneService.toDo(anyString())).thenReturn("output");
         mockMvc.perform(get("/one/toDo/texto"))
-                .andDo(print()).andExpect(status().isOk());
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(Constants.TEXT_PLAIN_VALUE));
+    }
+
+    @Test
+    public void testTest() throws Exception {
+
+        mockMvc.perform(get("/one/test"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(Constants.TEXT_PLAIN_VALUE));
+    }
+
+    @Test
+    public void testJson() throws Exception {
+
+        mockMvc.perform(get("/one/json"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(Constants.APPLICATION_JSON_VALUE));
     }
 
 }

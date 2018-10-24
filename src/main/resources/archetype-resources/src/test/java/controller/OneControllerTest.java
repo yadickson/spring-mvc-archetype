@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import static org.mockito.Mockito.when;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ${package}.domain.OneTO;
 import ${package}.service.OneService;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -25,6 +26,18 @@ public class OneControllerTest {
         when(oneService.toDo(anyString())).thenReturn("output");
         String result = oneController.toDoText("text");
         assertEquals("output", result);
+    }
+
+    @Test
+    public void testTest() throws Exception {
+        String result = oneController.test();
+        assertEquals("hello world", result);
+    }
+
+    @Test
+    public void testJson() throws Exception {
+        OneTO result = oneController.json();
+        assertNotNull(result);
     }
 
 }
