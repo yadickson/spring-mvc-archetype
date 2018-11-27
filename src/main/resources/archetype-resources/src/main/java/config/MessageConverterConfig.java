@@ -29,20 +29,38 @@ public class MessageConverterConfig extends WebMvcConfigurationSupport {
         for (HttpMessageConverter converter : converters) {
 
             if (converter instanceof StringHttpMessageConverter) {
-                List<MediaType> supported = new ArrayList<MediaType>();
-                supported.add(MediaType.parseMediaType(Constants.TEXT_PLAIN_VALUE));
-                supported.add(MediaType.parseMediaType(Constants.TEXT_XML_VALUE));
-                supported.add(MediaType.parseMediaType(Constants.TEXT_HTML_VALUE));
+                List<MediaType> supported = stringConverter().getSupportedMediaTypes();
                 ((StringHttpMessageConverter) converter).setSupportedMediaTypes(supported);
             }
 
             if (converter instanceof MappingJackson2HttpMessageConverter) {
-                List<MediaType> supported = new ArrayList<MediaType>();
-                supported.add(MediaType.parseMediaType(Constants.APPLICATION_JSON_VALUE));
+                List<MediaType> supported = jsonConverter().getSupportedMediaTypes();
                 ((MappingJackson2HttpMessageConverter) converter).setSupportedMediaTypes(supported);
             }
         }
 
         return handlerAdapter;
+    }
+
+    public static StringHttpMessageConverter stringConverter() {
+        List<MediaType> supported = new ArrayList<MediaType>();
+        supported.add(MediaType.parseMediaType(Constants.TEXT_PLAIN_VALUE));
+        supported.add(MediaType.parseMediaType(Constants.TEXT_XML_VALUE));
+        supported.add(MediaType.parseMediaType(Constants.TEXT_HTML_VALUE));
+
+        StringHttpMessageConverter converter = new StringHttpMessageConverter();
+        converter.setSupportedMediaTypes(supported);
+
+        return converter;
+    }
+
+    public static MappingJackson2HttpMessageConverter jsonConverter() {
+        List<MediaType> supported = new ArrayList<MediaType>();
+        supported.add(MediaType.parseMediaType(Constants.APPLICATION_JSON_VALUE));
+
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        converter.setSupportedMediaTypes(supported);
+
+        return converter;
     }
 }
