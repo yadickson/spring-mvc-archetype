@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import ${package}.config.GlobalExceptionHandlerConfig;
+import ${package}.config.ExceptionHandlerConfig;
 import static ${package}.config.MessageConverterConfig.jsonConverter;
 import static ${package}.config.MessageConverterConfig.stringConverter;
 import ${package}.constant.Constants;
@@ -39,7 +39,7 @@ public class OneControllerTest {
         mockMvc = MockMvcBuilders
                 .standaloneSetup(oneController)
                 .setMessageConverters(stringConverter(), jsonConverter())
-                .setControllerAdvice(new GlobalExceptionHandlerConfig())
+                .setControllerAdvice(new ExceptionHandlerConfig())
                 //.setCustomArgumentResolvers(new ClassArgumentResolver())
                 .build();
     }
