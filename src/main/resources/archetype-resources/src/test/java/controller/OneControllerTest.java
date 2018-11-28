@@ -17,8 +17,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import ${package}.config.ExceptionHandlerConfig;
-import static ${package}.config.MessageConverterConfig.jsonConverter;
-import static ${package}.config.MessageConverterConfig.stringConverter;
 import ${package}.constant.Constants;
 import ${package}.domain.OneTO;
 import ${package}.service.OneService;
@@ -38,7 +36,6 @@ public class OneControllerTest {
     public void setUp() {
         mockMvc = MockMvcBuilders
                 .standaloneSetup(oneController)
-                .setMessageConverters(stringConverter(), jsonConverter())
                 .setControllerAdvice(new ExceptionHandlerConfig())
                 //.setCustomArgumentResolvers(new ClassArgumentResolver())
                 .build();
@@ -66,11 +63,12 @@ public class OneControllerTest {
     @Test
     public void testRestToDoError() throws Exception {
         
-        when(oneService.toDo(anyString())).thenThrow(new RuntimeException());
+        when(oneService.toDo(anyString())).thenThrow(new RuntimeException("error"));
         
         mockMvc.perform(get("/one/toDo/texto"))
                 .andDo(print())
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(Constants.APPLICATION_JSON_VALUE));
     }
 
     @Test

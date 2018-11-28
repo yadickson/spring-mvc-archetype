@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import ${package}.constant.Constants;
 import ${package}.domain.OneTO;
 import ${package}.service.OneService;
 
@@ -20,19 +21,25 @@ public final class OneController {
     @Autowired
     private OneService oneService;
 
-    @RequestMapping(value = "/toDo/{text}", method = RequestMethod.GET)
+    @RequestMapping(value = "/toDo/{text}",
+            method = RequestMethod.GET,
+            produces = Constants.TEXT_PLAIN_VALUE)
     @ResponseBody
     public String toDoText(@PathVariable String text) {
         return oneService.toDo(text);
     }
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    @RequestMapping(value = "/test",
+            method = RequestMethod.GET,
+            produces = Constants.TEXT_PLAIN_VALUE)
     @ResponseBody
     public String test() {
         return "hello world";
     }
 
-    @RequestMapping(value = "/json", method = RequestMethod.GET)
+    @RequestMapping(value = "/json",
+            method = RequestMethod.GET,
+            produces = Constants.APPLICATION_JSON_VALUE)
     @ResponseBody
     public OneTO json() {
         OneTO to = new OneTO();
