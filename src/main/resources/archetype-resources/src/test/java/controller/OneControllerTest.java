@@ -27,7 +27,7 @@ public class OneControllerTest {
     MockMvc mockMvc;
 
     @InjectMocks
-    OneController oneController;
+    OneControllerImpl oneController;
 
     @Mock
     OneService oneService;
