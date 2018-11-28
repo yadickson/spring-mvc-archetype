@@ -8,7 +8,7 @@
     <wls:context-root>/${symbol_dollar}{project.artifactId}</wls:context-root>
 
     <wls:container-descriptor>
-        <wls:prefer-web-inf-classes>false</wls:prefer-web-inf-classes>
+        <wls:prefer-web-inf-classes>true</wls:prefer-web-inf-classes>
     </wls:container-descriptor>
 
 </wls:weblogic-web-app>
